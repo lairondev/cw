@@ -6,6 +6,6 @@ home_bp = Blueprint("home", __name__)
 
 @home_bp.route("/")
 def home():
-    title = "Início"
-    return "Olá estamos iniciando a CriativaWeb"
-    #return render_template("index.html")
+    page = "Início"
+    title = "Visão geral"
+    return render_template("home.html", title=title, page=page)
