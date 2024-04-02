@@ -16,7 +16,7 @@ def lista_clientes():
 def form_novo_cliente():
     page = "Clientes"
     title = "Novo cliente"
-    return render_template("cad_cliente.html", page=page, title=title)
+    return render_template("novo_cliente.html", page=page, title=title)
     
 @cliente_bp.route("/cadastra")
 def cadastra_cliente():
@@ -29,7 +29,7 @@ def form_editar_cliente(id_cliente):
     return render_template("editar_cliente.html", page=page, title=title)
     
 @cliente_bp.route("/<int:id_cliente>/atualiza")
-def atualiza_cliente():
+def atualiza_cliente(id_cliente):
     pass
     
 @cliente_bp.route("/<int:id_cliente>/delete")
