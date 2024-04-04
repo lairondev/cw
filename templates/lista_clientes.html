@@ -2,6 +2,15 @@
 
 {% block content %}
 
+		{% if request.args["msg"] %}
+		<div class="alert alert-{{request.args['alert']}} alert-dismissible text-white opacity-8" role="alert">
+			<span class="text-sm">{{request.args["msg"]}}</span>
+			<button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		{% endif %}
+
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
@@ -23,12 +32,12 @@
                     </tr>
                   </thead>
                   <tbody>
-					{% for cli in cliente %}
+					{% for cli in clientes %}
                     <tr>
 						<td>
 							<div class="d-flex px-3 py-1">
 								<div class=" d-flex flex-column justify-content-center">
-									<h6 class="mb-0 text-s">{{ cli.id }}</h6>
+									<h6 class="mb-0 text-s">{{ cli.id_cliente }}</h6>
 								</div>
 							</div>
 						</td>
@@ -42,16 +51,16 @@
 						</td>
 						<td>
 							<p class="text-s font-weight-bold mb-0">{{ cli.fone }}</p>
-							<p class="text-sm text-secondary mb-0">Organization</p>
+							<p class="text-sm text-secondary mb-0">{{ cli.cidade }}</p>
 						</td>
 						<td class="align-middle text-center text-sm">
-							<span class="badge badge-sm bg-gradient-{%if cli.status == 'tudo ok'%}success{%else%}warning{%endif%}">{{ cli.status }}</span>
+							<span class="badge badge-sm bg-gradient-{%if cli.status == 'regular'%}success{%else%}warning{%endif%}">{{ cli.status }}</span>
 						</td>
 						<td class="align-middle text-center">
-							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id) }}" title="Alterar dados">
+							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id_cliente) }}" title="Alterar dados">
 								<span class="material-symbols-outlined text-dark text-lg">edit_square</span>
 							</a>
-							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id) }}" title="Ver detalhes">
+							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id_cliente) }}" title="Ver detalhes">
 								<span class="material-symbols-outlined text-info text-lg">visibility</span>
 							</a>
 						</td>

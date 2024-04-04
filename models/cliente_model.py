@@ -14,6 +14,7 @@ class Cliente(db.Model):
     complemento = db.Column(db.String(49))
     cidade = db.Column(db.String(49))
     uf = db.Column(db.String(49))
+    status = db.Column(db.String(49), default='regular')
     
     def __init__(self, nome, email, fone, cpf_cnpj, logradouro, cep, bairro, complemento, cidade, uf):
         self.nome = nome

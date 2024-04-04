@@ -2,8 +2,20 @@
 
 {% block content %}
 
+              
 	<div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
+		
+		{% if request.args["msg"] %}
+		<div class="alert alert-{{request.args['alert']}} alert-dismissible text-white" role="alert">
+			<span class="text-sm">{{request.args["msg"]}}</span>
+			<button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		{% endif %}
+		
+		
           <div class="card mt-4">
              <div class="col-xl-10 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
               <div class="card card-plain">
@@ -12,22 +24,22 @@
                   <p class="mb-0">Certifique-se de preencher atentamente todos os campos</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form" action="{{url_for('cliente.cadastra_cliente')}}" method="POST">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Nome*</label>
-                      <input type="text" class="form-control" required>
+                      <input type="text" name="nome" class="form-control" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Email*</label>
-                      <input type="email" class="form-control" required>
+                      <input type="email" name="email" class="form-control" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Telefone*</label>
-                      <input type="phone" class="form-control" required>
+                      <input type="phone" name="fone" class="form-control" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">CPF/CNPJ*</label>
-                      <input type="text" class="form-control" required>
+                      <input type="text" name="cpf_cnpj" class="form-control" required>
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <label class="form-check-label" for="flexCheckDefault">
@@ -36,26 +48,26 @@
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Logradouro*</label>
-                      <input type="text" class="form-control" required>
+                      <input type="text"  name="logra" class="form-control" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">CEP*</label>
-                      <input type="text" class="form-control" required>
+                      <input type="text" name="cep" class="form-control" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Bairro*</label>
-                      <input type="text" class="form-control" required>
+                      <input type="text" name="bairro" class="form-control" required>
                     </div>
 					<div class="input-group input-group-outline mb-3">
                       <label class="form-label">Complemento*</label>
-                      <input type="text" class="form-control" required>
+                      <input type="text" name="comple" class="form-control" required>
                     </div>
 					<div class="input-group input-group-outline mb-3">
                       <label class="form-label">Cidade*</label>
-                      <input type="text" class="form-control" required>
+                      <input type="text" name="cidade" class="form-control" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <select class="form-control" required>
+                      <select class="form-control" name="uf" required>
 						<option value="">Selecione um estado</option>
 						<option value="AC">Acre</option>
 						<option value="AL">Alagoas</option>
@@ -87,9 +99,8 @@
 					  </select>
                     </div>
 					
-					
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Cadastrar</button>
+                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Cadastrar</button>
                     </div>
                   </form>
                 </div>
