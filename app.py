@@ -1,11 +1,12 @@
-from flask import Flask, url_for
+from flask import Flask
+from models.cliente_model import Cliente
+from config import app
 
 # IMPORTANDO VARIÁVEIS DE ROTA BP
 from routes.home import home_bp
 from routes.cliente import cliente_bp
 from routes.projeto import projeto_bp
 
-app = Flask(__name__)
 
 # REGISTRANDO AS ROTAS BP
 app.register_blueprint(home_bp)

@@ -48,8 +48,12 @@
 							<span class="badge badge-sm bg-gradient-{%if cli.status == 'tudo ok'%}success{%else%}warning{%endif%}">{{ cli.status }}</span>
 						</td>
 						<td class="align-middle text-center">
-							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id) }}" class="text-info text-sm font-weight-bold">Editar</a>
-							<a href="{{ url_for('cliente.delete', id_cliente=cli.id) }}" class="text-danger text-sm font-weight-bold px-2">Deletar</a>
+							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id) }}" title="Alterar dados">
+								<span class="material-symbols-outlined text-dark text-lg">edit_square</span>
+							</a>
+							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id) }}" title="Ver detalhes">
+								<span class="material-symbols-outlined text-info text-lg">visibility</span>
+							</a>
 						</td>
                     </tr>
                     {% endfor %}

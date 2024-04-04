@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from cwdb.database import PROJETOS
+from cwdb.database import PROJETOS, CLIENTES
 
 # CRIANDO VARIÁVEL DE ROTA BP
 projeto_bp = Blueprint("projeto", __name__)
@@ -16,7 +16,8 @@ def lista_projetos():
 def form_novo_projeto():
     page = "Projetos"
     title = "Novo projeto"
-    return render_template("novo_projeto.html", page=page, title=title)
+    global CLIENTES
+    return render_template("novo_projeto.html", page=page, title=title, clientes=CLIENTES)
     
 @projeto_bp.route("/cadastra")
 def cadastra_projeto():
