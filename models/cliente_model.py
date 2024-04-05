@@ -1,4 +1,5 @@
 from config import db, app
+from models.projeto_model import Projeto
 
 class Cliente(db.Model):
     __tablename__ = "cliente"
@@ -14,9 +15,11 @@ class Cliente(db.Model):
     complemento = db.Column(db.String(49))
     cidade = db.Column(db.String(49))
     uf = db.Column(db.String(49))
-    status = db.Column(db.String(49), default='regular')
+    status = db.Column(db.String(49))
     
-    def __init__(self, nome, email, fone, cpf_cnpj, logradouro, cep, bairro, complemento, cidade, uf):
+    projetos = db.relationship("Projeto", backref="cliente", lazy=True)
+    
+    def __init__(self, nome, email, fone, cpf_cnpj, logradouro, cep, bairro, complemento, cidade, uf, status):
         self.nome = nome
         self.email = email
         self.fone = fone
@@ -27,6 +30,7 @@ class Cliente(db.Model):
         self.complemento = complemento
         self.cidade = cidade
         self.uf = uf
+        self.status = status
         
 with app.app_context():   
     db.create_all()

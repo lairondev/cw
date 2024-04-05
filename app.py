@@ -1,5 +1,4 @@
 from flask import Flask
-from models.cliente_model import Cliente
 from config import app
 
 # IMPORTANDO VARIÁVEIS DE ROTA BP

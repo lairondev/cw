@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, redirect
-from models.cliente_model import Cliente
 from config import db
-from cwdb.database import CLIENTES
+from models.cliente_model import Cliente
 
 # CRIANDO VARIÁVEL DE ROTA BP
 cliente_bp = Blueprint("cliente", __name__)
@@ -35,10 +34,11 @@ def cadastra_cliente():
         comple = request.form["comple"]
         cidade = request.form["cidade"]
         uf = request.form["uf"]
+        status = request.form["status"]
         
         try:
             new_cliente = Cliente(
-                nome, email, fone, cpf_cnpj, logra, cep, bairro, comple, cidade, uf
+                nome, email, fone, cpf_cnpj, logra, cep, bairro, comple, cidade, uf, status
             )
             
             db.session.add(new_cliente)
