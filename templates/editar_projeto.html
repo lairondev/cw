@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="card mt-4">
+             <div class="col-xl-10 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+              <div class="card card-plain">
+                <div class="card-header">
+                  <h4 class="font-weight-bolder">Cadastre um novo projeto</h4>
+                  <p class="mb-0">Certifique-se de preencher corretamente todos os campos</p>
+                </div>
+                <div class="card-body">
+                  <form role="form">
+                    <div class="input-group input-group-outline mb-3">
+                      <select class="form-control" required>
+						<option>---Escolha o solicitante* ---</option>
+						{% for cli in clientes %}
+						<option value="{{cli.nome}}">{{ cli.nome }}</option>
+						{% endfor %}
+					  </select>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Nome do projeto*</label>
+                      <input type="text" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <select class="form-control" required>
+						<option>--- Tipo de projeto* ---</option>
+						<option value="Landing Page">Landing Page</option>
+						<option value="Site institucional">Site institucional</option>
+						<option value="Blog Pessoal">Blog Pessoal</option>
+						<option value="Blog comercial">Blog comercial</option>
+						<option value="Portal">Portal</option>
+						<option value="One Page">One Page</option>
+					  </select>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <select class="form-control" required>
+						<option>--- Tecnologia usada* ---</option>
+						<option value="Python">Python</option>
+						<option value="WordPress">WordPress</option>
+					  </select>
+                    </div>
+                    <div class="form-check form-check-info text-start ps-0">
+                      <label class="form-check-label" for="flexCheckDefault">
+                      <p class="text-dark font-weight-bolder">Forneça mais detalhes</p>
+                      </label>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Descreva detalhes do projeto...</label>
+                      <textarea class="form-control" rows="6" required></textarea>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Valor total*</label>
+                      <input type="text" class="form-control" required>
+                    </div>
+					<div class="input-group input-group-outline mb-3">
+                      <select class="form-control" required>
+						<option>--- Método de pagamento* ---</option>
+						<option value="Pix">Pix</option>
+						<option value="Cartão">Cartão</option>
+						<option value="Boleto">Boleto</option>
+					  </select>
+                    </div>
+					<div class="input-group input-group-outline mb-1">
+                      <input type="date" class="form-control" required>
+                    </div>
+                      <label class="">Informe a data de entrega acima*</label><br />
+					
+                    <div class="text-center">
+                      <button type="button" class="btn btn-lg bg-gradient-dark btn-lg w-100 mt-4 mb-0">Cadastrar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+		  
+		  
+		  
+          
+	</div>
+{% endblock %}

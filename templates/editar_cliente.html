@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="card mt-4">
+             <div class="col-xl-10 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+              <div class="card card-plain">
+                <div class="card-header">
+                  <h4 class="font-weight-bolder">Atualize os dados do cliente</h4>
+                  <p class="mb-0">Certifique-se de preencher corretamente todos os campos</p>
+                </div>
+                <div class="card-body">
+				
+				
+                  <form role="form" action="{{ url_for('cliente.atualiza_cliente') }}" method="POST">
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="text" value="{{cliente.nome}}" name="nome" class="form-control" placeholder="Nome*" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="email" value="{{cliente.email}}" name="email" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="phone" value="{{cliente.fone}}" name="fone" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="text" value="{{cliente.cpf_cnpj}}" name="cpf_cnpj" class="form-control" required>
+                    </div>
+					
+					
+                    <div class="form-check form-check-info text-start ps-0">
+                      <label class="form-check-label" for="flexCheckDefault">
+                      <p class="text-dark font-weight-bolder">Preencha o endereço</p>
+                      </label>
+                    </div>
+					
+					
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="text" value="{{cliente.logradouro}}" name="logradouro" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="text" value="{{cliente.cep}}" name="cep" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="text" value="{{cliente.bairro}}" name="bairro" class="form-control" required>
+                    </div>
+					<div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="text" value="{{cliente.complemento}}" name="complemento" class="form-control" required>
+                    </div>
+					<div class="input-group input-group-outline mb-3">
+                      <label class="form-label"></label>
+                      <input type="text" value="{{cliente.cidade}}" name="cidade" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <select class="form-control" name="uf" required>
+						<option value="">Selecione um estado</option>
+						<option value="AC"{%if cliente.uf == "AC"%}selected{%endif%}>Acre</option>
+						<option value="AL"{%if cliente.uf == "AL"%}selected{%endif%}>Alagoas</option>
+						<option value="AP"{%if cliente.uf == "AP"%}selected{%endif%}>Amapá</option>
+						<option value="AM"{%if cliente.uf == "AM"%}selected{%endif%}>Amazonas</option>
+						<option value="BA"{%if cliente.uf == "BA"%}selected{%endif%}>Bahia</option>
+						<option value="CE"{%if cliente.uf == "CE"%}selected{%endif%}>Ceará</option>
+						<option value="DF"{%if cliente.uf == "DF"%}selected{%endif%}>Distrito Federal</option>
+						<option value="ES"{%if cliente.uf == "ES"%}selected{%endif%}>Espírito Santo</option>
+						<option value="GO"{%if cliente.uf == "GO"%}selected{%endif%}>Goiás</option>
+						<option value="MA"{%if cliente.uf == "MA"%}selected{%endif%}>Maranhão</option>
+						<option value="MT"{%if cliente.uf == "MT"%}selected{%endif%}>Mato Grosso</option>
+						<option value="MS"{%if cliente.uf == "MS"%}selected{%endif%}>Mato Grosso do Sul</option>
+						<option value="MG"{%if cliente.uf == "MG"%}selected{%endif%}>Minas Gerais</option>
+						<option value="PA"{%if cliente.uf == "PA"%}selected{%endif%}>Pará</option>
+						<option value="PB"{%if cliente.uf == "PB"%}selected{%endif%}>Paraíba</option>
+						<option value="PR"{%if cliente.uf == "PR"%}selected{%endif%}>Paraná</option>
+						<option value="PE"{%if cliente.uf == "PE"%}selected{%endif%}>Pernambuco</option>
+						<option value="PI"{%if cliente.uf == "PI"%}selected{%endif%}>Piauí</option>
+						<option value="RJ"{%if cliente.uf == "RJ"%}selected{%endif%}>Rio de Janeiro</option>
+						<option value="RN"{%if cliente.uf == "RN"%}selected{%endif%}>Rio Grande do Norte</option>
+						<option value="RS"{%if cliente.uf == "RS"%}selected{%endif%}>Rio Grande do Sul</option>
+						<option value="RO"{%if cliente.uf == "RO"%}selected{%endif%}>Rondônia</option>
+						<option value="RR"{%if cliente.uf == "RR"%}selected{%endif%}>Roraima</option>
+						<option value="SC"{%if cliente.uf == "SC"%}selected{%endif%}>Santa Catarina</option>
+						<option value="SP"{%if cliente.uf == "SP"%}selected{%endif%}>São Paulo</option>
+						<option value="SE"{%if cliente.uf == "SE"%}selected{%endif%}>Sergipe</option>
+						<option value="TO"{%if cliente.uf == "TO"%}selected{%endif%}>Tocantins</option>
+					  </select>
+                    </div>
+					
+					<input type="hidden" name="id_cliente" value="{{cliente.id_cliente}}">
+					
+					
+                    <div class="text-center">
+                      <button type="input" class="btn btn-lg bg-gradient-info btn-lg w-100 mt-4 mb-0">Atualizar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+		  
+		  
+		  
+          
+	</div>
+{% endblock %}
