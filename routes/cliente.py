@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, redirect
 from config import db
-from models.cliente_model import Cliente
+from models.model import Cliente
 
 # CRIANDO VARIÁVEL DE ROTA BP
 cliente_bp = Blueprint("cliente", __name__)
