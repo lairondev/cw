@@ -27,7 +27,7 @@
                       <select class="form-control" name="solic" required>
 						<option>---Escolha o solicitante* ---</option>
 						{% for cli in clientes %}
-						<option value="{{cli.nome}}">{{ cli.nome }}</option>
+						<option value="{{cli.id_cliente}}">{{ cli.nome }}</option>
 						{% endfor %}
 					  </select>
                     </div>

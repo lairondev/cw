@@ -8,39 +8,41 @@
              <div class="col-xl-10 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
               <div class="card card-plain">
                 <div class="card-header">
-                  <h4 class="font-weight-bolder">Cadastre um novo projeto</h4>
+                  <h4 class="font-weight-bolder">Atualizar dados do projeto</h4>
                   <p class="mb-0">Certifique-se de preencher corretamente todos os campos</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form" action="{{ url_for('projeto.atualiza_projeto') }}" method="POST">
                     <div class="input-group input-group-outline mb-3">
-                      <select class="form-control" required>
+                      <select class="form-control" name="dono_proj" required>
 						<option>---Escolha o solicitante* ---</option>
 						{% for cli in clientes %}
-						<option value="{{cli.nome}}">{{ cli.nome }}</option>
+						<option value="{{cli.id_cliente}}">{{ cli.nome }}</option>
 						{% endfor %}
 					  </select>
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Nome do projeto*</label>
-                      <input type="text" class="form-control" required>
+                      <label class="form-label"></label>
+                      <input type="text" name="titulo" value="{{projeto.titulo}}" class="form-control" placeholder="Nome do projeto*" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <select class="form-control" required>
+                      <select class="form-control" name="tipo" required>
 						<option>--- Tipo de projeto* ---</option>
-						<option value="Landing Page">Landing Page</option>
-						<option value="Site institucional">Site institucional</option>
-						<option value="Blog Pessoal">Blog Pessoal</option>
-						<option value="Blog comercial">Blog comercial</option>
-						<option value="Portal">Portal</option>
-						<option value="One Page">One Page</option>
+						<option {% if projeto.tipo == "Landing Page" %} selected {% endif %} value="Landing Page">Landing Page</option>
+						<option {% if projeto.tipo == "Site institucional" %} selected {% endif %} value="Site institucional">Site institucional</option>
+						<option {% if projeto.tipo == "Blog Pessoal" %} selected {% endif %} value="Blog Pessoal">Blog Pessoal</option>
+						<option {% if projeto.tipo == "Blog comercia" %} selected {% endif %} value="Blog comercial">Blog comercial</option>
+						<option {% if projeto.tipo == "Portal" %} selected {% endif %} value="Portal">Portal</option>
+						<option {% if projeto.tipo == "One Page" %} selected {% endif %} value="One Page">One Page</option>
+						<option {% if projeto.tipo == "E-commerce" %} selected {% endif %} value="One Page">One Page</option>
+						<option {% if projeto.tipo == "Loja Dropshiping" %} selected {% endif %} value="One Page">One Page</option>
 					  </select>
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <select class="form-control" required>
+                      <select class="form-control" name="tec" required>
 						<option>--- Tecnologia usada* ---</option>
-						<option value="Python">Python</option>
-						<option value="WordPress">WordPress</option>
+						<option {% if projeto.tecnologia == "Python" %} selected {% endif %} value="Python">Python</option>
+						<option {% if projeto.tecnologia == "WordPress" %} selected {% endif %} value="WordPress">WordPress</option>
 					  </select>
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
@@ -49,28 +51,31 @@
                       </label>
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Descreva detalhes do projeto...</label>
-                      <textarea class="form-control" rows="6" required></textarea>
+                      <label class="form-label"></label>
+                      <textarea class="form-control" name="desc" rows="6" required>{{ projeto.detalhes }}</textarea>
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Valor total*</label>
-                      <input type="text" class="form-control" required>
+                      <label class="form-label"></label>
+                      <input type="text" name="valor" value="{{ projeto.valor }}" class="form-control" placeholder="Valor total*" required>
                     </div>
 					<div class="input-group input-group-outline mb-3">
-                      <select class="form-control" required>
+                      <select class="form-control" name="metodo_pag" required>
 						<option>--- Método de pagamento* ---</option>
-						<option value="Pix">Pix</option>
-						<option value="Cartão">Cartão</option>
-						<option value="Boleto">Boleto</option>
+						<option {% if projeto.metodo_pag == "Pix" %} selected {% endif %} value="Pix">Pix</option>
+						<option {% if projeto.metodo_pag == "Cartão" %} selected {% endif %} value="Cartão">Cartão</option>
+						<option {% if projeto.metodo_pag == "Boleto" %} selected {% endif %} value="Boleto">Boleto</option>
 					  </select>
                     </div>
 					<div class="input-group input-group-outline mb-1">
-                      <input type="date" class="form-control" required>
+                      <input type="date" name="data" value="{{ projeto.data_entrega }}" class="form-control" required>
                     </div>
                       <label class="">Informe a data de entrega acima*</label><br />
-					
+						
+						<!-- ID DO PROJETO SENDO PASSADO PELO HIDDEN -->
+						<input type="hidden" value="{{projeto.id_projeto}}" name="id_projeto">
+						
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-dark btn-lg w-100 mt-4 mb-0">Cadastrar</button>
+                      <button type="submit" class="btn btn-lg bg-gradient-dark btn-lg w-100 mt-4 mb-0">Cadastrar</button>
                     </div>
                   </form>
                 </div>

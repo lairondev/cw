@@ -2,6 +2,15 @@
 
 {% block content %}
 
+		{% if request.args["msg"] %}
+		<div class="alert alert-{{request.args['alert']}} alert-dismissible text-white opacity-8" role="alert">
+			<span class="text-sm">{{request.args["msg"]}}</span>
+			<button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		{% endif %}
+		
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
@@ -23,35 +32,35 @@
                     </tr>
                   </thead>
                   <tbody>
-					{% for proj in projeto %}
+					{% for proj in projetos %}
                     <tr>
 						<td>
 							<div class="d-flex px-3 py-1">
 								<div class=" d-flex flex-column justify-content-center">
-									<h6 class="mb-0 text-s">{{ proj.id }}</h6>
+									<h6 class="mb-0 text-s">{{ proj.id_projeto }}</h6>
 								</div>
 							</div>
 						</td>
 						<td>
 							<div class="d-flex px-2 py-1">
 								<div class="d-flex flex-column justify-content-center">
-								<h6 class="mb-0 text-s">{{ proj.projeto }}</h6>
-								<p class="text-sm text-secondary mb-0">{{ proj.solicitante }}</p>
+								<h6 class="mb-0 text-s">{{ proj.titulo }}</h6>
+								<p class="text-sm text-secondary mb-0">{{ proj.cliente.nome }}</p>
 								</div>
 							</div>
 						</td>
 						<td>
-							<p class="text-s font-weight-bold mb-0">{{ proj.serviço }}</p>
-							<p class="text-sm text-secondary mb-0">{{ proj.produzido }}</p>
+							<p class="text-s font-weight-bold mb-0">{{ proj.tipo }}</p>
+							<p class="text-sm text-secondary mb-0">{{ proj.tecnologia }}</p>
 						</td>
 						<td class="align-middle text-center text-sm">
-							<span class="badge badge-sm bg-gradient-{%if proj.status == 'finalizado'%}success{%elif proj.status == 'em atraso'%}danger{%else%}info{%endif%}">{{ proj.status }}</span>
+							<span class="badge badge-sm bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}{%else%}success{%endif%}">{{ proj.status }}</span>
 						</td>
 						<td class="align-middle text-center">
-							<a href="{{ url_for('projeto.form_editar_projeto', id_projeto=proj.id) }}" title="Alterar dados">
+							<a href="{{ url_for('projeto.form_editar_projeto', id_projeto=proj.id_projeto) }}" title="Alterar dados">
 								<span class="material-symbols-outlined text-dark text-lg">edit_square</span>
 							</a>
-							<a href="{{ url_for('projeto.form_editar_projeto', id_projeto=proj.id) }}" title="Ver detalhes">
+							<a href="{{ url_for('projeto.form_editar_projeto', id_projeto=proj.id_projeto) }}" title="Ver detalhes">
 								<span class="material-symbols-outlined text-info text-lg">visibility</span>
 							</a>
 						</td>
