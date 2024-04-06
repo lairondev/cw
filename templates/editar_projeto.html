@@ -17,7 +17,7 @@
                       <select class="form-control" name="dono_proj" required>
 						<option>---Escolha o solicitante* ---</option>
 						{% for cli in clientes %}
-						<option value="{{cli.id_cliente}}">{{ cli.nome }}</option>
+						<option value="{{cli.id_cliente}}"{%if projeto.cliente_id == cli.id_cliente%}selected{%endif%}>{{ cli.nome }}</option>
 						{% endfor %}
 					  </select>
                     </div>
