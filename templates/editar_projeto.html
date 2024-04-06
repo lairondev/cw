@@ -27,7 +27,7 @@
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <select class="form-control" name="tipo" required>
-						<option>--- Tipo de projeto* ---</option>
+			
 						<option {% if projeto.tipo == "Landing Page" %} selected {% endif %} value="Landing Page">Landing Page</option>
 						<option {% if projeto.tipo == "Site institucional" %} selected {% endif %} value="Site institucional">Site institucional</option>
 						<option {% if projeto.tipo == "Blog Pessoal" %} selected {% endif %} value="Blog Pessoal">Blog Pessoal</option>
@@ -69,7 +69,20 @@
 					<div class="input-group input-group-outline mb-1">
                       <input type="date" name="data" value="{{ projeto.data_entrega }}" class="form-control" required>
                     </div>
-                      <label class="">Informe a data de entrega acima*</label><br />
+                      <label class="text-warning">Informe a data de entrega acima*</label><br />
+                    <br />
+                    <div class="input-group input-group-outline mb-3">
+                      <select class="form-control" name="status" required>
+                        <option value="iniciado"{%if projeto.status == 'iniciado'%}selected{%endif%}>Iniciado</option>--- status: iniciado ---</option>
+                        <option value="em atraso"{%if projeto.status == 'em atraso'%}selected{%endif%}>Em atraso</option>------ status: em atraso ---</option>
+                        <option value="cancelado"{%if projeto.status == 'cancelado'%}selected{%endif%}>Cancelado</option>--- status: cancelado ---</option>
+                        <option value="finalizado"{%if projeto.status == 'finalizado'%}selected{%endif%}>Finalizado</option>--- status: finalizado--- status: finalizado ---</option>
+                        <option value="congelado"{%if projeto.status == 'congelado'%}selected{%endif%}>Congelado</option>--- status: congelado ---</option>
+
+
+                      </select>   
+                    </div>
+                    <label class="text-secondary">status atual</label>
 						
 						<!-- ID DO PROJETO SENDO PASSADO PELO HIDDEN -->
 						<input type="hidden" value="{{projeto.id_projeto}}" name="id_projeto">

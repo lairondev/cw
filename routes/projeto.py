@@ -17,7 +17,12 @@ def lista_projetos():
 def form_novo_projeto():
     page = "Projetos"
     title = "Novo projeto"
+    count = Cliente.query.count()
     clientes = Cliente.query.all()
+    if count == 0:
+      msg = "Não há clientes cadastrados, cadastre um cliente para cadastrar um projeto."
+      alert = "warning"
+      return redirect(url_for("projeto.lista_projetos", msg=msg, alert=alert))
     return render_template("novo_projeto.html", page=page, title=title, clientes=clientes)
     
     
@@ -81,6 +86,7 @@ def atualiza_projeto():
             valor = request.form["valor"]
             metodo_pag = request.form["metodo_pag"]
             data = request.form["data"]
+            status = request.form["status"]
             dono_proj = request.form["dono_proj"]
             
             try:
@@ -91,6 +97,7 @@ def atualiza_projeto():
                 proj.valor = valor
                 proj.metodo_pag = metodo_pag
                 proj.data_entrega = data
+                proj.status = status
                 proj.cliente_id = dono_proj
                 
                 db.session.commit()

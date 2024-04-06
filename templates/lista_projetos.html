@@ -54,7 +54,7 @@
 							<p class="text-sm text-secondary mb-0">{{ proj.tecnologia }}</p>
 						</td>
 						<td class="align-middle text-center text-sm">
-							<span class="badge badge-sm bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}{%else%}success{%endif%}">{{ proj.status }}</span>
+							<span class="badge badge-sm bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}primary{%elif proj.status == 'congelado'%}secondary{%else%}success{%endif%}">{{ proj.status }}</span>
 						</td>
 						<td class="align-middle text-center">
 							<a href="{{ url_for('projeto.form_editar_projeto', id_projeto=proj.id_projeto) }}" title="Alterar dados">
