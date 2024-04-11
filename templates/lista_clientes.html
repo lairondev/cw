@@ -60,11 +60,46 @@
 							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id_cliente) }}" title="Alterar dados">
 								<span class="material-symbols-outlined text-dark text-lg">edit_square</span>
 							</a>
-							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id_cliente) }}" title="Ver detalhes">
-								<span class="material-symbols-outlined text-info text-lg">visibility</span>
-							</a>
+							<span class="material-symbols-outlined text-info text-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{cli.id_cliente}}" style="cursor:pointer;" title="Ver detalhes">visibility</span>
 						</td>
                     </tr>
+
+					<!-- Modal -->
+					<div class="modal fade" id="staticBackdrop{{cli.id_cliente}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h1 class="modal-title fs-5" id="staticBackdropLabel">Detalhes de {{ cli.nome }}</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						  </div>
+						  <div class="modal-body">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="card-body">
+											
+											<strong>Projetos</strong>
+											
+											{% for proj in cli.projetos %}
+											<ul class="list-group nav nav-pills">
+												<li class="list-group-item mb-2">
+													<span class="mx-2">{{ proj.titulo }}</span>
+													<span class="badge badge-sm text-xxs bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}primary{%elif proj.status == 'congelado'%}secondary{%else%}success{%endif%}">{{ proj.status }}</span>
+												</li>
+											</ul>
+											{% endfor %}
+											
+										</div>
+									</div>
+								</div>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+							<a href="" class="btn btn-danger">Eliminar</a>
+						  </div>
+						</div>
+					  </div>
+					</div>
                     {% endfor %}
                   </tbody>
                 </table>
