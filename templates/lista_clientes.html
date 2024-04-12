@@ -2,138 +2,139 @@
 
 {% block content %}
 
-		{% if request.args["msg"] %}
-		<div class="alert alert-{{request.args['alert']}} alert-dismissible text-white opacity-8" role="alert">
-			<span class="text-sm">{{request.args["msg"]}}</span>
-			<button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		{% endif %}
+{% if request.args["msg"] %}
+<div class="alert alert-{{request.args['alert']}} alert-dismissible text-white opacity-8" role="alert">
+	<span class="text-sm">{{request.args["msg"]}}</span>
+	<button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+</div>
+{% endif %}
 
-      <div class="row">
-        <div class="col-12">
-          <div class="card my-4">
+<div class="row">
+    <div class="col-12">
+        <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Exibe 10 registros por página</h6>
-              </div>
+				<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+					<h6 class="text-white text-capitalize ps-3">Exibe 10 registros por página</h6>
+				</div>
             </div>
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0 text-center">
+				<div class="table-responsive p-0 text-center">
 			  
-				{% if clientes|length == 0 %}
-				<h6 class="text-secondary">Não há nada a exibir ainda, clique no botão para inserir</h6>
-				<a href="{{url_for('cliente.form_novo_cliente')}}" class="btn btn-info">novo cliente</a>
-				{% else %}
-			
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">ID</th>
-                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Cliente</th>
-                      <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">Telefone</th>
-                      <th class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Status</th>
-                      <th class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-					{% for cli in clientes %}
-                    <tr>
-						<td>
-							<div class="d-flex px-3 py-1">
-								<div class=" d-flex flex-column justify-content-center">
-									<h6 class="mb-0 text-s">{{ cli.id_cliente }}</h6>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="d-flex px-2 py-1">
-								<div class="d-flex flex-column justify-content-center">
-								<h6 class="mb-0 text-s">{{ cli.nome }}</h6>
-								<p class="text-sm text-secondary mb-0">{{ cli.email }}</p>
-								</div>
-							</div>
-						</td>
-						<td>
-							<p class="text-s font-weight-bold mb-0">{{ cli.fone }}</p>
-							<p class="text-sm text-secondary mb-0">{{ cli.cidade }}</p>
-						</td>
-						<td class="align-middle text-center text-sm">
-							<span class="badge badge-sm bg-gradient-{%if cli.status == 'regular'%}success{%else%}warning{%endif%}">{{ cli.status }}</span>
-						</td>
-						<td class="align-middle text-center">
-							<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id_cliente) }}" title="Alterar dados">
-								<span class="material-symbols-outlined text-dark text-lg">edit_square</span>
-							</a>
-							<span class="material-symbols-outlined text-info text-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{cli.id_cliente}}" style="cursor:pointer;" title="Ver detalhes">visibility</span>
-						</td>
-                    </tr>
-
-					<!-- Modal -->
-					<div class="modal fade" id="staticBackdrop{{cli.id_cliente}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					  <div class="modal-dialog">
-						<div class="modal-content">
-						  <div class="modal-header">
-							<h1 class="modal-title fs-5" id="staticBackdropLabel">Detalhes de {{ cli.nome }}</h1>
-							<button type="button" class="btn-close text-secondary" data-bs-dismiss="modal" aria-label="Close" style="font-size:2rem;">&times;</button>
-						  </div>
-						  <div class="modal-body">
-							<div class="row">
-								<div class="col-12">
-									<div class="card">
-										<div class="list-group overflow-auto" style="text-align:left; max-height: 200px;">
-											
-											<h5>Projetos: {{cli.projetos|length}}</h5>
-											
-											{% for proj in cli.projetos %}
-											<ul  style="margin-left:-32px;">
-												<li class="list-group-item mb-1">
-													<span class="mx-2">{{ proj.titulo }}</span>
-													<span class="badge badge-sm text-xxs bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}primary{%elif proj.status == 'congelado'%}secondary{%else%}success{%endif%}">{{ proj.status }}</span>
-												</li>
-											</ul>
-											{% endfor %}
-											
+					{% if clientes|length == 0 %}
+					<h6 class="text-secondary">Não há nada a exibir ainda, clique no botão para inserir</h6>
+					<a href="{{url_for('cliente.form_novo_cliente')}}" class="btn btn-info">novo cliente</a>
+					{% else %}
+				
+					<table class="table align-items-center mb-0">
+						<thead>
+							<tr>
+							<th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">ID</th>
+							<th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Cliente</th>
+							<th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Telefone</th>
+							<th class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Status</th>
+							<th class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for cli in clientes %}
+							<tr>
+								<td>
+									<div class="d-flex justify-content-center">
+										<div class=" d-flex flex-column justify-content-center">
+											<span class="mb-0 text-s">{{ cli.id_cliente }}</span>
 										</div>
-										
-										<hr class="dark horizontal my-0">
-										
-										<div class="mt-2">
-											<h5>Dados pessoais</h5>
+									</div>
+								</td>
+								<td>
+									<div class="d-flex justify-content-center">
+										<div class="d-flex flex-column">
+											<h6 class="mb-0 text-s">{{ cli.nome }}</h6>
+											<p class="text-sm text-secondary mb-0">{{ cli.email }}</p>
+										</div>
+									</div>
+								</td>
+								<td>
+									<p class="text-s font-weight-bold mb-0">{{ cli.fone }}</p>
+									<p class="text-sm text-secondary mb-0">{{ cli.cidade }}</p>
+								</td>
+								<td class="align-middle text-center text-sm">
+									<span class="badge badge-sm bg-gradient-{%if cli.status == 'regular'%}success{%else%}warning{%endif%}">{{ cli.status }}</span>
+								</td>
+								<td class="align-middle text-center">
+									<a href="{{ url_for('cliente.form_editar_cliente', id_cliente=cli.id_cliente) }}" title="Alterar dados">
+										<span class="material-symbols-outlined text-dark text-lg">edit_square</span>
+									</a>
+									<span class="material-symbols-outlined text-info text-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{cli.id_cliente}}" style="cursor:pointer;" title="Ver detalhes">visibility</span>
+								</td>
+							</tr>
+
+							<!-- Modal -->
+							<div class="modal fade" id="staticBackdrop{{cli.id_cliente}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h1 class="modal-title fs-5" id="staticBackdropLabel">Detalhes de {{ cli.nome }}</h1>
+											<button type="button" class="btn-close text-secondary" data-bs-dismiss="modal" aria-label="Close" style="font-size:2rem;">&times;</button>
+										</div>
+										<div class="modal-body">
+											<div class="row">
+												<div class="col-12">
+													<div class="card">
+														<div class="list-group overflow-auto" style="text-align:left; max-height: 200px;">
+															<h5>Projetos: {{cli.projetos|length}}</h5>
+															
+															{% for proj in cli.projetos %}
+															<ul  style="margin-left:-32px;">
+																<li class="list-group-item mb-1">
+																	<span class="mx-2">{{ proj.titulo }}</span>
+																	<span class="badge badge-sm text-xxs bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}primary{%elif proj.status == 'congelado'%}secondary{%else%}success{%endif%}">{{ proj.status }}</span>
+																</li>
+															</ul>
+															{% endfor %}
+														</div>
 											
-											<ul class="list-group"  style="text-align:left;">
-												<li class="list-group-item"><strong class="text-secondary">Nome: </strong>{{cli.nome}}</li>
-												<li class="list-group-item"><strong class="text-secondary">Email: </strong>{{cli.email}}</li>
-												<li class="list-group-item"><strong class="text-secondary">Fone: </strong>{{cli.fone}}</li>
-												<li class="list-group-item"><strong class="text-secondary">CPF/CNPJ: </strong>{{cli.cpf_cnpj}}</li>
-												<li class="list-group-item"><strong class="text-secondary">Logra: </strong>{{cli.logradouro}}</li>
-												<li class="list-group-item"><strong class="text-secondary">CEP: </strong>{{cli.cep}}</li>
-												<li class="list-group-item"><strong class="text-secondary">Bairro: </strong>{{cli.bairro}}</li>
-												<li class="list-group-item"><strong class="text-secondary">Comp: </strong>{{cli.complemento}}</li>
-												<li class="list-group-item"><strong class="text-secondary">Cidade: </strong>{{cli.cidade}}</li>
-												<li class="list-group-item"><strong class="text-secondary">Estado: </strong>{{cli.uf}}</li>
-												<li class="list-group-item"><strong class="text-secondary">Status: </strong><span class="badge badge-sm bg-gradient-{%if cli.status == 'regular'%}success{%else%}warning{%endif%}">{{cli.status}}</span></li>
-											</ul>
+														<hr class="dark horizontal my-0">
+											
+														<div class="mt-2">
+															<h5>Dados pessoais</h5>
+															
+															<ul class="list-group"  style="text-align:left;">
+																<li class="list-group-item"><strong class="text-secondary">Nome: </strong>{{cli.nome}}</li>
+																<li class="list-group-item"><strong class="text-secondary">Email: </strong>{{cli.email}}</li>
+																<li class="list-group-item"><strong class="text-secondary">Fone: </strong>{{cli.fone}}</li>
+																<li class="list-group-item"><strong class="text-secondary">CPF/CNPJ: </strong>{{cli.cpf_cnpj}}</li>
+																<li class="list-group-item"><strong class="text-secondary">Logra: </strong>{{cli.logradouro}}</li>
+																<li class="list-group-item"><strong class="text-secondary">CEP: </strong>{{cli.cep}}</li>
+																<li class="list-group-item"><strong class="text-secondary">Bairro: </strong>{{cli.bairro}}</li>
+																<li class="list-group-item"><strong class="text-secondary">Comp: </strong>{{cli.complemento}}</li>
+																<li class="list-group-item"><strong class="text-secondary">Cidade: </strong>{{cli.cidade}}</li>
+																<li class="list-group-item"><strong class="text-secondary">Estado: </strong>{{cli.uf}}</li>
+																<li class="list-group-item"><strong class="text-secondary">Status: </strong><span class="badge badge-sm bg-gradient-{%if cli.status == 'regular'%}success{%else%}warning{%endif%}">{{cli.status}}</span></li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+												<a href="{{ url_for('cliente.delete', id_cliente=cli.id_cliente) }}" class="btn btn-danger" onclick="return confirm('Todos os projetos deste cliente também serão excluídos, deseja continuar?')">Eliminar</a>
+											</div>
 										</div>
 									</div>
 								</div>
-						  </div>
-						  <div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-							<a href="{{ url_for('cliente.delete', id_cliente=cli.id_cliente) }}" class="btn btn-danger" onclick="return confirm('Todos os projetos deste cliente também serão excluídos, deseja continuar?')">Eliminar</a>
-						  </div>
-						</div>
-					  </div>
-					</div>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-			  {% endif %}
+							</div>
+						{% endfor %}
+					  </tbody>
+					</table>
+					{% endif %}
+				</div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+
 
 {% endblock %}
