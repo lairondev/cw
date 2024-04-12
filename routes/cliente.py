@@ -102,17 +102,34 @@ def atualiza_cliente():
                 db.session.commit()
                 msg = "Dados atualizados com sucesso!"
                 alert = "success"
-                print(msg)
                 return redirect(url_for('cliente.lista_clientes', msg=msg, alert=alert))
                 
             except Exception as e:
                 db.session.rollback()
                 msg = f"Não foi possível atualizar - Erro {str(e)}"
-                alert = "danger"    
-                print(msg)
+                alert = "danger"  
                 return redirect(url_for('cliente.lista_clientes', msg=msg, alert=alert))
                 
    
 @cliente_bp.route("/<int:id_cliente>/delete")
 def delete(id_cliente):
-    pass
+    cliente = Cliente.query.get(id_cliente)
+    
+    if not cliente:
+        msg = "O cliente que você tentou excluir não existe, selecione um cliente válido."
+        alert = "warning"
+        return  redirect(url_for('cliente.lista_clientes', msg=msg, alert=alert))
+    
+    else:
+        try:
+            db.session.delete(cliente)
+            db.session.commit()
+            msg = "Cliente excluido com sucesso!"
+            alert = "success"
+            return redirect(url_for('cliente.lista_clientes', msg=msg, alert=alert))
+            
+        except Exception as e:
+            db.session.rollback()
+            msg = f"Não foi possível excluir este cliente - Erro {str(e)}"
+            alert = "danger"  
+            return redirect(url_for('cliente.lista_clientes', msg=msg, alert=alert))   

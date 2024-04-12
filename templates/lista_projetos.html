@@ -16,11 +16,17 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Exibindo 10 itens por página</h6>
+                <h6 class="text-white text-capitalize ps-3">Exibe 10 registros por página</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
+              <div class="table-responsive p-0 text-center">
+				  
+				{% if projetos|length == 0 %}
+				<h6 class="text-secondary">Não há nada a exibir ainda, clique no botão para inserir</h6>
+				<a href="{{url_for('projeto.form_novo_projeto')}}" class="btn btn-info">iniciar projeto</a>
+				{% else %}
+			
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
@@ -60,14 +66,53 @@
 							<a href="{{ url_for('projeto.form_editar_projeto', id_projeto=proj.id_projeto) }}" title="Alterar dados">
 								<span class="material-symbols-outlined text-dark text-lg">edit_square</span>
 							</a>
-							<a href="{{ url_for('projeto.form_editar_projeto', id_projeto=proj.id_projeto) }}" title="Ver detalhes">
-								<span class="material-symbols-outlined text-info text-lg">visibility</span>
-							</a>
+							<span class="material-symbols-outlined text-info text-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{proj.id_projeto}}" style="cursor:pointer;" title="Ver detalhes">visibility</span>
 						</td>
                     </tr>
-                    {% endfor %}
+
+				<!-- Modal -->
+				<div class="modal fade" id="staticBackdrop{{proj.id_projeto}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="staticBackdropLabel">Detalhes do projeto</h1>
+								<button type="button" class="btn-close text-secondary " data-bs-dismiss="modal" aria-label="Close" style="font-size:2rem;">&times;</button>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-12">
+										<div class="card">
+											
+											<div class="card-body" style="text-align:left;">
+												
+												<ul class="list-group text-left">
+													<li class="list-group-item"><strong class="text-secondary">Solicitante: </strong>{{proj.cliente.nome}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Email: </strong>{{proj.tipo}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Fone: </strong>{{proj.tecnologia}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Descrição: </strong>{{proj.detalhes}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Logra: </strong>{{proj.valor}}</li>
+													<li class="list-group-item"><strong class="text-secondary">CEP: </strong>{{proj.metodo_pag}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Bairro: </strong>{{proj.data_entrega}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Status: </strong><span class="badge badge-sm bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}primary{%elif proj.status == 'congelado'%}secondary{%else%}success{%endif%}">{{ proj.status }}</span></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+							  </div>
+						  
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+								<a href="{{ url_for('projeto.delete', id_projeto=proj.id_projeto) }}" class="btn btn-danger" onclick="return confirm('Deseja mesmo excluir este projeto?')">Eliminar</a>
+							  </div>
+						  
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
                   </tbody>
                 </table>
+			  {% endif %}
               </div>
             </div>
           </div>

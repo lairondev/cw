@@ -16,11 +16,17 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Exibindo 10 registros por página</h6>
+                <h6 class="text-white text-capitalize ps-3">Exibe 10 registros por página</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
+              <div class="table-responsive p-0 text-center">
+			  
+				{% if clientes|length == 0 %}
+				<h6 class="text-secondary">Não há nada a exibir ainda, clique no botão para inserir</h6>
+				<a href="{{url_for('cliente.form_novo_cliente')}}" class="btn btn-info">novo cliente</a>
+				{% else %}
+			
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
@@ -70,19 +76,19 @@
 						<div class="modal-content">
 						  <div class="modal-header">
 							<h1 class="modal-title fs-5" id="staticBackdropLabel">Detalhes de {{ cli.nome }}</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							<button type="button" class="btn-close text-secondary" data-bs-dismiss="modal" aria-label="Close" style="font-size:2rem;">&times;</button>
 						  </div>
 						  <div class="modal-body">
 							<div class="row">
 								<div class="col-12">
 									<div class="card">
-										<div class="card-body">
+										<div class="card-body list-group overflow-auto" style="max-height: 200px;">
 											
-											<strong>Projetos</strong>
+											<h5>Projetos: {{cli.projetos|length}}</h5>
 											
 											{% for proj in cli.projetos %}
-											<ul class="list-group nav nav-pills">
-												<li class="list-group-item mb-2">
+											<ul>
+												<li class="list-group-item mb-1">
 													<span class="mx-2">{{ proj.titulo }}</span>
 													<span class="badge badge-sm text-xxs bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}primary{%elif proj.status == 'congelado'%}secondary{%else%}success{%endif%}">{{ proj.status }}</span>
 												</li>
@@ -90,12 +96,32 @@
 											{% endfor %}
 											
 										</div>
+										
+										<hr class="dark horizontal my-0">
+										
+										<div class="card-body">
+											<h5>Dados pessoais</h5>
+											
+											<ul class="list-group"  style="text-align:left;">
+												<li class="list-group-item"><strong class="text-secondary">Nome: </strong>{{cli.nome}}</li>
+												<li class="list-group-item"><strong class="text-secondary">Email: </strong>{{cli.email}}</li>
+												<li class="list-group-item"><strong class="text-secondary">Fone: </strong>{{cli.fone}}</li>
+												<li class="list-group-item"><strong class="text-secondary">CPF/CNPJ: </strong>{{cli.cpf_cnpj}}</li>
+												<li class="list-group-item"><strong class="text-secondary">Logra: </strong>{{cli.logradouro}}</li>
+												<li class="list-group-item"><strong class="text-secondary">CEP: </strong>{{cli.cep}}</li>
+												<li class="list-group-item"><strong class="text-secondary">Bairro: </strong>{{cli.bairro}}</li>
+												<li class="list-group-item"><strong class="text-secondary">Comp: </strong>{{cli.complemento}}</li>
+												<li class="list-group-item"><strong class="text-secondary">Cidade: </strong>{{cli.cidade}}</li>
+												<li class="list-group-item"><strong class="text-secondary">Estado: </strong>{{cli.uf}}</li>
+												<li class="list-group-item"><strong class="text-secondary">Status: </strong><span class="badge badge-sm bg-gradient-{%if cli.status == 'regular'%}success{%else%}warning{%endif%}">{{cli.status}}</span></li>
+											</ul>
+										</div>
 									</div>
 								</div>
 						  </div>
 						  <div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-							<a href="" class="btn btn-danger">Eliminar</a>
+							<a href="{{ url_for('cliente.delete', id_cliente=cli.id_cliente) }}" class="btn btn-danger" onclick="return confirm('Todos os projetos deste cliente também serão excluídos, deseja continuar?')">Eliminar</a>
 						  </div>
 						</div>
 					  </div>
@@ -104,6 +130,7 @@
                   </tbody>
                 </table>
               </div>
+			  {% endif %}
             </div>
           </div>
         </div>

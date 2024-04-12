@@ -16,7 +16,7 @@ class Cliente(db.Model):
     uf = db.Column(db.String(49))
     status = db.Column(db.String(49))
     
-    projetos = db.relationship("Projeto", backref="cliente", lazy=True)
+    projetos = db.relationship("Projeto", backref="cliente", cascade="all, delete-orphan", lazy=True)
     
     def __init__(self, nome, email, fone, cpf_cnpj, logradouro, cep, bairro, complemento, cidade, uf, status):
         self.nome = nome

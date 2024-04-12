@@ -116,4 +116,23 @@ def atualiza_projeto():
     
 @projeto_bp.route("/<int:id_projeto>/delete")
 def delete(id_projeto):
-    pass
+    projeto = Projeto.query.get(id_projeto)
+    
+    if not projeto:
+        msg = "O projeto que você tentou excluir não existe, selecione um projeto válido."
+        alert = "warning"
+        return  redirect(url_for('projeto.lista_projetos', msg=msg, alert=alert))
+    
+    else:
+        try:
+            db.session.delete(projeto)
+            db.session.commit()
+            msg = "Projeto excluido com sucesso!"
+            alert = "success"
+            return redirect(url_for('projeto.lista_projetos', msg=msg, alert=alert))
+            
+        except Exception as e:
+            db.session.rollback()
+            msg = f"Não foi possível excluir este cliente - Erro {str(e)}"
+            alert = "danger"  
+            return redirect(url_for('projeto.lista_projetos', msg=msg, alert=alert))
