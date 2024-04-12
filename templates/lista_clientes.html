@@ -82,12 +82,12 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="card">
-										<div class="card-body list-group overflow-auto" style="max-height: 200px;">
+										<div class="list-group overflow-auto" style="text-align:left; max-height: 200px;">
 											
 											<h5>Projetos: {{cli.projetos|length}}</h5>
 											
 											{% for proj in cli.projetos %}
-											<ul>
+											<ul  style="margin-left:-32px;">
 												<li class="list-group-item mb-1">
 													<span class="mx-2">{{ proj.titulo }}</span>
 													<span class="badge badge-sm text-xxs bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}primary{%elif proj.status == 'congelado'%}secondary{%else%}success{%endif%}">{{ proj.status }}</span>
@@ -99,7 +99,7 @@
 										
 										<hr class="dark horizontal my-0">
 										
-										<div class="card-body">
+										<div class="mt-2">
 											<h5>Dados pessoais</h5>
 											
 											<ul class="list-group"  style="text-align:left;">
