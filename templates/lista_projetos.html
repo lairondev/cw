@@ -87,12 +87,12 @@
 												
 												<ul class="list-group text-left">
 													<li class="list-group-item"><strong class="text-secondary">Solicitante: </strong>{{proj.cliente.nome}}</li>
-													<li class="list-group-item"><strong class="text-secondary">Email: </strong>{{proj.tipo}}</li>
-													<li class="list-group-item"><strong class="text-secondary">Fone: </strong>{{proj.tecnologia}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Tipo: </strong>{{proj.tipo}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Tecnologia: </strong>{{proj.tecnologia}}</li>
 													<li class="list-group-item"><strong class="text-secondary">Descrição: </strong>{{proj.detalhes}}</li>
-													<li class="list-group-item"><strong class="text-secondary">Logra: </strong>{{proj.valor}}</li>
-													<li class="list-group-item"><strong class="text-secondary">CEP: </strong>{{proj.metodo_pag}}</li>
-													<li class="list-group-item"><strong class="text-secondary">Bairro: </strong>{{proj.data_entrega}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Valor: </strong>{{proj.valor}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Pagamento via: </strong>{{proj.metodo_pag}}</li>
+													<li class="list-group-item"><strong class="text-secondary">Entrega em: </strong>{{proj.data_entrega}}</li>
 													<li class="list-group-item"><strong class="text-secondary">Status: </strong><span class="badge badge-sm bg-gradient-{%if proj.status == 'iniciado'%}info{%elif proj.status == 'em atraso'%}danger{%elif proj.status == 'cancelado'%}primary{%elif proj.status == 'congelado'%}secondary{%else%}success{%endif%}">{{ proj.status }}</span></li>
 												</ul>
 											</div>
