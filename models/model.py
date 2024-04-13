@@ -57,5 +57,31 @@ class Projeto(db.Model):
         self.status = status
         self.cliente_id = cliente_id
     
+
+
+class User(db.Model):
+    __tablename__ = "user"
+    
+    id_user = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    nick = db.Column(db.String(20))
+    email = db.Column(db.String(100), unique=True)
+    nome = db.Column(db.String(20))
+    sobrenome = db.Column(db.String(20))
+    skill = db.Column(db.String(10))
+    fone = db.Column(db.String(15))
+    foto = db.Column(db.String(255))
+    senha = db.Column(db.String(200))
+    
+    def __init__(self, nick, email, nome, sobrenome, skill, fone, foto, senha):
+        self.nick = nick
+        self.email = email
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.skill = skill
+        self.fone = fone
+        self.foto = foto
+        self.senha = senha
+
+
 with app.app_context():
   db.create_all()
