@@ -24,14 +24,14 @@
                   <p class="mb-0">Certifique-se de preencher atentamente todos os campos</p>
                 </div>
                 <div class="card-body">
-                  <form role="form" action="{{url_for('cliente.cadastra_cliente')}}" method="POST" enctype="multipart/form-data">
+                  <form role="form" action="{{url_for('perfil.cadastra_perfil')}}" method="POST" enctype="multipart/form-data">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Apelido*</label>
                       <input type="text" name="nick" class="form-control" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Nome*</label>
-                      <input type="email" name="nome" class="form-control" required>
+                      <input type="nome" name="nome" class="form-control" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Sobrenome*</label>
@@ -48,9 +48,9 @@
                     <div class="input-group input-group-outline mb-3">
                       <select class="form-control" name="func" required>
 						<option value="">Selecione uma função</option>
-						<option value="AC">FullStack</option>
-						<option value="AL">FrontEnd</option>
-						<option value="AL">BacktEnd</option>
+						<option value="FullStack">FullStack</option>
+						<option value="FrontEnd">FrontEnd</option>
+						<option value="BacktEnd">BacktEnd</option>
 					  </select>
                     </div>
                     <div class="input-group input-group-outline mb-3">
@@ -59,11 +59,11 @@
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Senha*</label>
-                      <input type="pass" name="senha1" class="form-control" required>
+                      <input type="password" name="senha1" class="form-control" required>
                     </div>
 					<div class="input-group input-group-outline mb-3">
                       <label class="form-label">Confirme a senha*</label>
-                      <input type="pass" name="senha2" class="form-control" required>
+                      <input type="password" name="senha2" class="form-control" required>
                     </div>
 					
 					

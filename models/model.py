@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 from config import db, app
 
 class Cliente(db.Model):
@@ -80,7 +81,10 @@ class User(db.Model):
         self.skill = skill
         self.fone = fone
         self.foto = foto
-        self.senha = senha
+        self.senha = generate_password_hash(senha)
+
+    def verify_password(self, senha):
+        return check_password_hash(self.senha, senha)
 
 
 with app.app_context():
